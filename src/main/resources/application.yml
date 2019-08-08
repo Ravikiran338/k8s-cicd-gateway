@@ -1,0 +1,178 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: gatewayservice 
+
+eureka:
+  client:
+    enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://microservices-eureka-service:8761/eureka/
+  instance:
+    hostname: gatewayservice
+    
+ribbon:
+  eureka:
+    enable: true
+  isSecure: false
+  ReadTimeout: 60000
+  ConnectTimeout: 45000
+  SocketTimeout: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 110000
+
+  # server:
+    # wait-time-in-ms-when-sync-empty: 0
+    
+  # ribbon:
+    # ReadTimeout: 60000
+    # ConnectTimeout: 60000
+
+# management:
+  # endpoints:
+    # web:
+      # exposure:
+        # include: health,routes,metrics,info   
+        
+# logging:
+  # pattern: 
+    # console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+# ribbon:
+  # eureka:
+    # enabled: true
+
+  
+zuul: 
+ ignoredServices: '*'
+ routes:
+   user:
+     path: /user/**
+     serviceId: userservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+     
+   auth:
+     path: /auth/**
+     serviceId: authservice    
+     sensitiveHeaders: Cookie,Set-Cookie
+     stripPrefix: true
+
+   account:
+     path: /account/**
+     serviceId: accountservice     
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+     
+   balance:
+     path: /balance/**
+     serviceId: balanceservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+     
+   customer:
+     path: /customer/**
+     serviceId: customerservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+     
+   withdraw:
+     path: /withdraw/**
+     serviceId: withdrawservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+     
+   locker:
+     path: /locker/**
+     serviceId: lockerservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+     
+   deposit:
+     path: /deposit/**
+     serviceId: depositservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
+
+ host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+    max-total-connections: 200
+    max-per-route-connections: 20
+    time-unit: MILLISECONDS
+    time-to-live: 10000
+
+     
+# hystrix:
+  # command:
+    # default:
+      # execution:
+        # isolation:
+          # thread:
+            # timeoutInMilliseconds: 60000            
+          
+# zuul: 
+  # ignoredServices: '*'
+  # routes:
+    # aviones:
+      # path: /user/**
+      # serviceId: user-service
+      # ribbon:
+        # listOfServers:"http://users:2222" 
+    # account:
+      # path: /account/**
+      # serviceId: account-service
+      # ribbon:
+        # listOfServers:"http://account:3333"
+  # host:
+      # socket-timeout-millis: 60000
+      
+
+
+# spring:
+   # cloud:
+     # gateway:
+       # discovery:
+         # locator:
+           # enabled: true
+           # lowerCaseServiceId: true
+           
+      # routes:
+      # - id: authservice
+        # uri: lb://authservice
+        # predicates:
+        # - Path=/auth/**
+        # filters:
+          # - AddResponseHeader=Access-Control-Allow-Origin, *
+          # - RewritePath=/account/(?<path>.*), /$\{path}
+      # - id: userservice
+        # uri: lb://userservice
+        # predicates:
+        # - Path=/user/**
+        # filters:
+          # - AddResponseHeader=Access-Control-Allow-Origin, *
+          # - RewritePath=/user/(?<path>.*), /$\{path}
+      # - id: accountservice
+        # uri: lb://accountservice
+        # predicates:
+        # - Path=/account/**
+        # filters:
+          # - AddResponseHeader=Access-Control-Allow-Origin, *
+          # - RewritePath=/account/(?<path>.*), /$\{path}
+
+
+
+
+          
+          
+          

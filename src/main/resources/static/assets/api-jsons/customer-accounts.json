@@ -1,0 +1,20 @@
+[
+    {
+        "customerId": "101",
+        "accountNumber": "1005449869",
+        "accountType": "Joint",
+        "balance": "12000"
+    },
+    {
+        "customerId": "102",
+        "accountNumber": "1005449879",
+        "accountType": "Savings",
+        "balance": "50000"
+    },
+    {
+        "customerId": "103",
+        "accountNumber": "1005449889",
+        "accountType": "Savings",
+        "balance": "100000"
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "customerName": "Kiran",
+        "accountNumber": "1005449869",
+        "availableBalance": "12000"
+    },
+    {
+        "id": 1,
+        "customerName": "Sai",
+        "accountNumber": "1005449879",
+        "availableBalance": "50000"
+    },
+    {
+        "id": 2,
+        "customerName": "Prasad",
+        "accountNumber": "1005449889",
+        "availableBalance": "100000"
+    }
+]

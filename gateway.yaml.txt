@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gatewayservice
+  labels:
+    app: msa-banking-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: gateway-service
+      app: msa-banking-app
+
+  template:
+    metadata:
+      name: gateway-msa-pod
+      labels:
+        name: gateway-service
+        app: msa-banking-app
+    spec:
+      containers:
+      - env:
+        name: gateway-container
+        image: ${REPOSITORY_TAG}
+        imagePullPolicy: Always
+
+      imagePullSecrets:
+          - name: myregistrykey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gatewayservice
+  labels:
+    name: gateway-service
+    app: msa-banking-app
+spec:
+  type: LoadBalancer
+  ports:
+  -  protocol: TCP
+     targetPort: 8090
+     port: 8090
+  selector:
+    name: gateway-service
+    app: msa-banking-app
