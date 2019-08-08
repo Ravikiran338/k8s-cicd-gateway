@@ -6,8 +6,8 @@ pipeline {
 	environment {
      DOCKERHUB_USERNAME = "ravi338"
      APP_NAME = "msa-banking-aws"
-     
-     REPOSITORY_TAG="${DOCKERHUB_USERNAME}/${APP_NAME}-gateway:${BUILD_ID}"
+     SERVICE_NAME = "gateway"
+     REPOSITORY_TAG="${DOCKERHUB_USERNAME}/${APP_NAME}-${SERVICE_NAME}:${BUILD_ID}"
 	 }
 	stages {
 	         stage ('scm checkout') {
