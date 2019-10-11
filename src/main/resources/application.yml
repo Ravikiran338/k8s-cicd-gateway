@@ -103,6 +103,12 @@ zuul:
      serviceId: depositservice    
      stripPrefix: true
      sensitiveHeaders: Cookie,Set-Cookie
+     
+   email:
+     path: /email/**
+     serviceId: emailservice    
+     stripPrefix: true
+     sensitiveHeaders: Cookie,Set-Cookie
 
  host:
     connect-timeout-millis: 60000
